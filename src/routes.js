@@ -1,20 +1,25 @@
-import React from 'react';
-import { Home, SignIn, SignUp } from 'views';
+import React from "react";
+import { Home, NotFound, SignIn, SignUp } from "views";
 
 const routes = [
   {
-    path: '/',
+    path: "/",
     component: () => <Home />,
     exact: true,
   },
   {
-    path: '/SignIn',
+    path: "/SignIn",
     component: () => <SignIn />,
     exact: true,
   },
   {
-    path: '/SignUp',
+    path: "/SignUp",
     component: () => <SignUp />,
+    exact: true,
+  },
+  {
+    path: "*",
+    component: () => <NotFound />,
     exact: true,
   },
 ];

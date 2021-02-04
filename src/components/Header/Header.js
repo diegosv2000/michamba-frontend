@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import NavButton from './NavBar/NavButton';
 import logo from 'images/Logo.png';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     header:{
@@ -13,8 +14,13 @@ const useStyles = makeStyles(() => ({
     },
     logoContent:{
         height: '100%',
+        border:'none',
+        background:'none',
         "& img":{
             height: '100%'
+        },
+        "&:hover":{
+            cursor:'pointer'
         }
     },
     navBar:{
@@ -28,12 +34,12 @@ const useStyles = makeStyles(() => ({
 const Header = () => {
     
     const classes = useStyles();
-
+    const history = useHistory();
     return (
         <header className={classes.header}>
-            <div className={classes.logoContent}>
+            <button className={classes.logoContent} onClick={() => history.push("/")}>
                 <img src={logo} alt="logo" />
-            </div>
+            </button>
             <nav className={classes.navBar}>
                 <NavButton  />
             </nav>

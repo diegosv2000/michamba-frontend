@@ -32,7 +32,7 @@ const Header = () => {
     return (
         <header className={classes.header}>
             <div className={classes.logoContent}>
-                <img src={logo} />
+                <img src={logo} alt="logo" />
             </div>
             <nav className={classes.navBar}>
                 <NavButton />

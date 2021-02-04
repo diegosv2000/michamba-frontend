@@ -1,19 +1,16 @@
-import React from 'react';
-import {Header, Footer} from 'components';
-import {Home} from 'views';
-import './App.css';
-import { formatMs } from '@material-ui/core';
+import React from "react";
+import { Header } from "components";
+import { Home, SignIn, SignUp } from "views";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      
       <Header />
-
       <main>
-        <Home />
+        {/* <Home /> */}
+        <SignUp />
       </main>
-      <Footer />
     </div>
   );
 }

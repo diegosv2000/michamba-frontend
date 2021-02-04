@@ -4,16 +4,16 @@
   text-align: center;
 }
 
-section{
+section {
   display: flex;
   justify-content: center;
   margin: 40px 0;
 }
-main{
+main {
   width: 100%;
 }
-#stepsSection{
-  background: #F8F8F8;
+#stepsSection {
+  background: #f8f8f8;
   padding: 40px 0;
 }
 

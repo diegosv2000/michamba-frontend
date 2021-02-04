@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     signIn:{
@@ -34,14 +35,14 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const NavButton = () => {
+const NavButton = props => {
     
     const classes = useStyles();
-
+    const history = useHistory();
     return (
         <React.Fragment>
-            <button className={classes.signIn}>Iniciar sesión</button>
-            <button className={classes.signUp}>Registrarse</button>
+            <button className={classes.signIn} onClick={() => history.push("/SignIn")}>Iniciar sesión</button>
+            <button className={classes.signUp} onClick={() => history.push("/SignUp")}>Registrarse</button>
         </React.Fragment>
     );
 }

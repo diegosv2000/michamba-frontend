@@ -1,15 +1,14 @@
 import React from "react";
-import { Header } from "components";
 import { Home, SignIn, SignUp } from "views";
+import { renderRoutes } from 'react-router-config';
+import routes from "./routes";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <main>
-        {/* <Home /> */}
-        <SignUp />
+        {renderRoutes(routes)}
       </main>
     </div>
   );

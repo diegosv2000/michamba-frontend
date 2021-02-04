@@ -35,7 +35,7 @@ const Header = () => {
                 <img src={logo} alt="logo" />
             </div>
             <nav className={classes.navBar}>
-                <NavButton />
+                <NavButton  />
             </nav>
         </header>
     );

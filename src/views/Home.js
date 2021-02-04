@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import { Footer, Seeker } from "components";
+import { Footer, Header, Seeker } from "components";
 import PrincipalServices from "components/PrincipalServices/PrincipalServices";
 import { worker, worker2, paso1, paso2, paso3 } from "images";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -117,9 +118,9 @@ const useStyles = makeStyles(() => ({
 
 const Home = () => {
   const classes = useStyles();
-
   return (
     <React.Fragment>
+      <Header />
       <section>
         <div className={classes.container}>
           <div className={classes.introduction}>

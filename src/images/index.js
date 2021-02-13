@@ -7,3 +7,8 @@ export { default as paso1 } from './paso1.png';
 export { default as paso2 } from './paso2.png';
 export { default as paso3 } from './paso3.png';
 export { default as LogoBN } from './LogoBN.png';
+export { default as Logo } from './Logo.png';
+export { default as Male } from './male.png';
+export { default as Female } from './female.png';
+export { default as StarYellow } from './StarYellow.png';
+export { default as StarGray } from './StarGray.png';

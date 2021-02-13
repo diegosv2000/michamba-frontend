@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Header, InputForm } from "components";
+import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "20px 0 0",
@@ -61,11 +62,16 @@ const useStyles = makeStyles(() => ({
 
 function SignUp() {
   const classes = useStyles();
+  const history = useHistory();
+  const show = false;
+  const SignUpValue = e =>{
+    e.preventDefault();
+  }
   return (
     <React.Fragment>
-      <Header />
+      <Header show={show} />
       <section>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={SignUpValue}>
           <h2 className={classes.titleForm}>Registrarse</h2>
           <div className={classes.inputForm}>
             <InputForm type="text" label="Nombres" />
@@ -84,7 +90,7 @@ function SignUp() {
           </div>
           <div className={classes.textForm}>
             <div>¿Ya tienes una cuenta?</div>
-            <button>Inicia Sesión aquí</button>
+            <button onClick={() => history.push("/SignIn")}>Inicia Sesión aquí</button>
           </div>
           <button className={classes.buttonForm}>Registrarse</button>
         </form>

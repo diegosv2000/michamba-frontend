@@ -118,9 +118,11 @@ const useStyles = makeStyles(() => ({
 
 const Home = () => {
   const classes = useStyles();
+  const show = true;
+  
   return (
     <React.Fragment>
-      <Header />
+      <Header show={show} />
       <section>
         <div className={classes.container}>
           <div className={classes.introduction}>
@@ -203,6 +205,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       <Footer />
     </React.Fragment>
   );

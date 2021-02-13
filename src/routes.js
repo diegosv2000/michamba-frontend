@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, NotFound, SignIn, SignUp } from "views";
+import { Home, NotFound, SignIn, SignUp, SearchWorker } from "views";
 
 const routes = [
   {
@@ -15,6 +15,11 @@ const routes = [
   {
     path: "/SignUp",
     component: () => <SignUp />,
+    exact: true,
+  },
+  {
+    path: "/SearchWorker/search=gasfitero",
+    component: () => <SearchWorker />,
     exact: true,
   },
   {

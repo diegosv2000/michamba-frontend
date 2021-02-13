@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles(() => ({
@@ -36,7 +37,7 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
     
     const classes = useStyles();
-
+    const history = useHistory();
     return (
         <div className={classes.seekerContent}>
           <select>
@@ -53,7 +54,7 @@ const Home = () => {
             <option>Mecánico</option>
             <option>Enfermero</option>
           </select>
-          <button className={classes.buttonSeeker}>Buscar</button>
+          <button onClick={() => history.push("/SearchWorker/search=gasfitero")} className={classes.buttonSeeker}>Buscar</button>
         </div>
     );
 }

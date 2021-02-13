@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Header, InputForm } from "components";
+import { useHistory } from "react-router-dom";
+import axios from 'axios';
 const useStyles = makeStyles(() => ({
   form: {
     margin: "50px 0",
@@ -61,11 +63,16 @@ const useStyles = makeStyles(() => ({
 
 function SignIn() {
   const classes = useStyles();
+  const history = useHistory();
+  const show = false;
+  const SignInValue = e =>{
+    e.preventDefault();
+  }
   return (
     <React.Fragment>
-      <Header />
+      <Header show={show} />
       <section>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={SignInValue}>
           <h2 className={classes.titleForm}>Iniciar Sesión</h2>
           <div className={classes.inputForm}>
             <InputForm type="email" label="Email" />
@@ -75,7 +82,7 @@ function SignIn() {
           </div>
           <div className={classes.textForm}>
             <div>¿Aún no tienes una cuenta?</div>
-            <button>Registrate aquí</button>
+            <button onClick={() => history.push("/SignUp")}>Registrate aquí</button>
           </div>
           <button className={classes.buttonForm}>Iniciar Sesión</button>
         </form>

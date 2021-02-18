@@ -26,7 +26,7 @@ const routes = [
     exact: true,
   },
   {
-    path: "/id_servicio=?:idservicio",
+    path: "/services/:idservicio",
     component: () => <SearchWorker />,
     exact: true,
   },

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Footer, Header, Seeker, CardWorker } from "components";
 import { useHistory, useParams } from "react-router-dom";
@@ -17,15 +17,36 @@ const SearchWorker = () => {
   const classes = useStyles();
   let { idservicio } = useParams();
 
+  let [workers, setWorkers] = useState([]);
+
+  useEffect(() => {
+    if (workers.length === 0) {
+      axios
+        .post(
+          "https://michamba-recursos.herokuapp.com/consultaworker",
+          `idservicio=${idservicio}`
+        )
+        .then((res) => {
+          setWorkers(res.data);
+          console.log("asda: " + workers.length);
+        });
+    }
+  }, [workers]);
+
   return (
     <React.Fragment>
       <Header show={show} />
       <div className={classes.seekerContent}>
         <Seeker />
       </div>
-      <div className={classes.cardContent}>
+      {/* <div className={classes.cardContent}>
         <CardWorker />
-      </div>
+      </div> */}
+      {workers.map((e) => {
+        <div className={classes.cardContent} key={e.idusuario}>
+          <CardWorker />
+        </div>;
+      })}
     </React.Fragment>
   );
 };

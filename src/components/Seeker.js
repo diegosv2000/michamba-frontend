@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -42,34 +42,40 @@ const Home = () => {
   const classes = useStyles();
   const history = useHistory();
   const [services, setServices] = useState([]);
-  let isTrue =useRef(true);
+  const [service, setService] = useState(" ");
   useEffect(() => {
-    getWorkers();
-    return () => {
-      isTrue.current=false;
+    if (services.length === 0) {
+      axios
+        .get("https://michamba-recursos.herokuapp.com/getserv")
+        .then((res) => {
+          setServices(res.data);
+        });
     }
   }, [services]);
-
-  const getWorkers = () =>{
-    if(isTrue){
-       axios
-      .get("https://michamba-recursos.herokuapp.com/getserv")
-      .then((res) => {
-        setServices(res.data);
-      });
-    }
-  }
-
+  const changeOption = (e) => {
+    e.preventDefault();
+    setService(e.target.value);
+    console.log("asda: " + service);
+  };
   const searchWorker = (e) => {
     e.preventDefault();
-    history.push(`/id_servicio=?:${"hola"}`);
+    if (service == "Selecciona una opción" || service == " ") {
+      alert("Ingresa correctamente el servicio :D")
+    } else {
+      history.push(`/services/${service}`);
+    }
   };
+
   return (
     <form className={classes.seekerContent}>
-      <select className={classes.select}>
+      <select className={classes.select} onChange={changeOption}>
         <option>Selecciona una opción</option>
         {services.map((e) => {
-          return <option key={e.nombre}>{e.nombre}</option>;
+          return (
+            <option key={e.idservicio} value={e.idservicio}>
+              {e.nombre}
+            </option>
+          );
         })}
       </select>
       <button onClick={searchWorker} className={classes.buttonSeeker}>

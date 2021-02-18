@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   buttonService: {
@@ -37,9 +38,9 @@ const useStyles = makeStyles(() => ({
 
 const ServiceItem = (props) => {
   const classes = useStyles();
-
+  const history = useHistory();
   return (
-    <button className={classes.buttonService}>
+    <button className={classes.buttonService} onClick={()=>{history.push(props.rout)}} >
       <div className={classes.imgService}>
         <img src={props.img} alt="service" />
       </div>

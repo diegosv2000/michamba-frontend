@@ -156,7 +156,7 @@ const EditProfile = () => {
   });
   return (
     <React.Fragment>
-      <Header />
+      <Header show={true} />
       <section>
         <form className={classes.form}>
           <h2 className={classes.titleForm}>Datos Personales</h2>

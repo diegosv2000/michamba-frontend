@@ -1,7 +1,8 @@
 import { makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { Header, InputForm } from "components";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "20px 0 0",
@@ -64,8 +65,47 @@ function SignUp() {
   const classes = useStyles();
   const history = useHistory();
   const show = false;
+  const [userData, setUserData] = useState({
+    dni: "",
+    name: "",
+    lname: "",
+    password: "",
+    email: "",
+    password: "",
+    nick: "---",
+    bank: " ",
+    district: " ",
+  });
+  let qs = require("qs");
+  const handleChangeDate = (e) => {
+    e.preventDefault();
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
   const SignUpValue = (e) => {
     e.preventDefault();
+    const user = {
+      dni: userData.dni,
+      nombre: userData.name,
+      apellido: userData.lname,
+      correo: userData.email,
+      password: userData.password,
+      nick: userData.nick,
+      cuenta_int: userData.bank,
+      distrito: userData.district,
+    };
+    const formData = qs.stringify(user);
+    axios
+      .post("https://michamba-recursos.herokuapp.com/registro", formData)
+      .then((res) => {
+        if (res.data == "usuario añadido") {
+          history.push("/sign-in");
+        } else {
+          alert("Revisa bien los datos");
+        }
+      });
   };
   return (
     <React.Fragment>
@@ -74,19 +114,44 @@ function SignUp() {
         <form className={classes.form} onSubmit={SignUpValue}>
           <h2 className={classes.titleForm}>Registrarse</h2>
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Nombres" />
+            <InputForm
+              type="number"
+              label="DNI"
+              name="dni"
+              onChange={handleChangeDate}
+            />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Apellidos" />
+            <InputForm
+              type="text"
+              label="Nombres"
+              name="name"
+              onChange={handleChangeDate}
+            />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="email" label="Email" />
+            <InputForm
+              type="text"
+              label="Apellidos"
+              name="lname"
+              onChange={handleChangeDate}
+            />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="password" label="Contraseña" />
+            <InputForm
+              type="email"
+              label="Email"
+              name="email"
+              onChange={handleChangeDate}
+            />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="password" label="Confirmar Contraseña" />
+            <InputForm
+              type="password"
+              label="Contraseña"
+              name="password"
+              onChange={handleChangeDate}
+            />
           </div>
           <div className={classes.textForm}>
             <div>¿Ya tienes una cuenta?</div>
@@ -94,7 +159,9 @@ function SignUp() {
               Inicia Sesión aquí
             </button>
           </div>
-          <button className={classes.buttonForm}>Registrarse</button>
+          <button type="submit" className={classes.buttonForm}>
+            Registrarse
+          </button>
         </form>
       </section>
     </React.Fragment>

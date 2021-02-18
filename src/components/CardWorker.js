@@ -101,8 +101,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CardWorker = () => {
+const CardWorker = (props) => {
   const show = true;
+  const history = useHistory();
   const classes = useStyles();
   return (
     <div className={classes.card}>
@@ -114,8 +115,8 @@ const CardWorker = () => {
           <div className={classes.logoContent}>
             <img src={Logo} />
           </div>
-          <div className={classes.nameWorker}>Miguel Angel</div>
-          <div className={classes.lnameWorker}>Salvador Maldonado</div>
+          <div className={classes.nameWorker}>{props.name}</div>
+          <div className={classes.lnameWorker}>{props.lname}</div>
         </div>
       </div>
       <div className={classes.containerCard}>
@@ -127,9 +128,9 @@ const CardWorker = () => {
           <img src={StarGray} />
         </div>
         <div className={classes.infoCard}>
-          <div>Edad: 45</div>
-          <div>Distrito: Jesus María</div>
-          <button>Contactar</button>
+          <div>Edad: {props.age}</div>
+          <div>Distrito: {props.district}</div>
+          <button onClick={()=>{history.push("/contract-request")}}>Contactar</button>
         </div>
       </div>
     </div>

@@ -60,7 +60,7 @@ const Home = () => {
   const searchWorker = (e) => {
     e.preventDefault();
     if (service == "Selecciona una opción" || service == " ") {
-      alert("Ingresa correctamente el servicio :D")
+      alert("Ingresa correctamente el servicio :D");
     } else {
       history.push(`/services/${service}`);
     }

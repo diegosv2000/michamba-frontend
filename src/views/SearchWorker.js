@@ -1,37 +1,45 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import { Footer, Header, Seeker, CardWorker } from "components";
+import { Header, Seeker, CardWorker } from "components";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 const useStyles = makeStyles(() => ({
   seekerContent: {
     margin: "30px 0 30px 50px",
   },
+  workersContent: {
+    width: "95%",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "row",
+  },
   cardContent: {
-    margin: "40px 50px",
+    margin: "20px",
+  },
+  notfound: {
+    color: "#FF4E4E",
+    fontSize: "15px",
   },
 }));
 
 const SearchWorker = () => {
   const show = true;
   const classes = useStyles();
+  const history = useHistory();
   let { idservicio } = useParams();
 
-  let [workers, setWorkers] = useState([]);
+  const [workers, setWorkers] = useState([]);
 
   useEffect(() => {
-    if (workers.length === 0) {
-      axios
-        .post(
-          "https://michamba-recursos.herokuapp.com/consultaworker",
-          `idservicio=${idservicio}`
-        )
-        .then((res) => {
-          setWorkers(res.data);
-          console.log("asda: " + workers.length);
-        });
-    }
-  }, [workers]);
+    axios
+      .post(
+        "https://michamba-recursos.herokuapp.com/consultaworker",
+        `idservicio=${idservicio}`
+      )
+      .then((res) => {
+        setWorkers(res.data);
+      });
+  }, [idservicio]);
 
   return (
     <React.Fragment>
@@ -39,14 +47,26 @@ const SearchWorker = () => {
       <div className={classes.seekerContent}>
         <Seeker />
       </div>
-      {/* <div className={classes.cardContent}>
-        <CardWorker />
-      </div> */}
-      {workers.map((e) => {
-        <div className={classes.cardContent} key={e.idusuario}>
-          <CardWorker />
-        </div>;
-      })}
+      <div className={classes.workersContent}>
+        {workers.length == 0 ? (
+          <div className={classes.notfound}>
+            No hay se encontraron trabajadores disponibles.
+          </div>
+        ) : (
+          workers.map((e) => {
+            return (
+              <div className={classes.cardContent} key={e.idusuario}>
+                <CardWorker
+                  name={e.nombre}
+                  lname={e.apellido}
+                  age={e.edad}
+                  district={e.distrito}
+                />
+              </div>
+            );
+          })
+        )}
+      </div>
     </React.Fragment>
   );
 };

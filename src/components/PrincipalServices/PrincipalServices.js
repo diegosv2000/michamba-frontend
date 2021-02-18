@@ -11,9 +11,9 @@ const items = [
 const PrincipalServices = (props) => {
   return (
     <React.Fragment>
-      <ServiceItem nameService="GASFITERÍA" img={gasfitero} />
-      <ServiceItem nameService="CERRAJERÍA" img={cerrajero} />
-      <ServiceItem nameService="CARPINTERÍA" img={carpintero} />
+      <ServiceItem nameService="GASFITERÍA" img={gasfitero} rout="/services/5" />
+      <ServiceItem nameService="CERRAJERÍA" img={cerrajero} rout="/services/2" />
+      <ServiceItem nameService="CARPINTERÍA" img={carpintero} rout="/services/1" />
     </React.Fragment>
   );
 };

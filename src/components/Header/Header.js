@@ -1,9 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import NavButton from "./NavBar/NavButton";
-import UserNav from "./NavBar/UserNav";
 import logo from "images/Logo.png";
 import { useHistory } from "react-router-dom";
+import UserNav from "./NavBar/UserNav";
+import Cookies from "universal-cookie";
+
+
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -32,6 +35,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const cookies = new Cookies();
+const verificationSignIn = () => {
+  if (cookies.get("idusuario")) {
+    return true;
+  } else {
+    return false;
+  }
+};
 const Header = (props) => {
   const classes = useStyles();
   const history = useHistory();
@@ -40,8 +51,11 @@ const Header = (props) => {
       <button className={classes.logoContent} onClick={() => history.push("/")}>
         <img src={logo} alt="logo" />
       </button>
-      <nav className={classes.navBar}>{props.show ? <NavButton /> : ""}</nav>
-      {/* <UserNav /> */}
+      {verificationSignIn() ? (
+        <nav className={classes.navBar}>{props.show ? <UserNav /> : ""}</nav>
+      ) : (
+        <nav className={classes.navBar}>{props.show ? <NavButton /> : ""}</nav>
+      )}
     </header>
   );
 };

@@ -112,7 +112,7 @@ function DataTarget() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Header />
+      <Header show={true} />
 
       <section>
         <form className={classes.form}>

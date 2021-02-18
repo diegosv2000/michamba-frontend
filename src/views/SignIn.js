@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import { Header, InputForm } from "components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Cookies from "universal-cookie";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "50px 0",
@@ -61,11 +62,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function SignIn() {
+const SignIn = () => {
   const classes = useStyles();
   const history = useHistory();
   const show = false;
-
+  const cookies = new Cookies();
   let qs = require("qs");
   const [userData, setUserData] = useState({
     email: "",
@@ -94,10 +95,11 @@ function SignIn() {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        if (res.data == "login correcto") {
-          history.push("/");
-        } else {
+        if (res.data == "login incorrecto") {
           console.log("Usuario duplicado o datos mal ingresados");
+        } else {
+          cookies.set("idusuario", res.data, { path: "/" });
+          history.push("/");
         }
       })
       .catch((error) => {
@@ -128,7 +130,7 @@ function SignIn() {
           </div>
           <div className={classes.textForm}>
             <div>¿Aún no tienes una cuenta?</div>
-            <button onClick={() => history.push("/SignUp")}>
+            <button onClick={() => history.push("/sign-up")}>
               Registrate aquí
             </button>
           </div>
@@ -139,6 +141,6 @@ function SignIn() {
       </section>
     </React.Fragment>
   );
-}
+};
 
 export default SignIn;

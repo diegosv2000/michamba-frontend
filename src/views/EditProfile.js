@@ -81,26 +81,46 @@ const useStyles = makeStyles(() => ({
     borderBottom: "2px solid #719CF0",
     outline: "none",
   },
-  offerServices:{
-    width:'700px',
+  offerServices: {
+    width: "700px",
     boxShadow: "0px 0px 20px 0px rgb(0,0,0,.25)",
-    margin:'20px auto',
-    padding:'30px 0',
-    borderRadius:'15px'
-
+    margin: "20px auto",
+    padding: "30px 0",
+    borderRadius: "15px",
   },
-  titleServices:{
-    fontSize:'30px',
-    fontWeight:'bolder',
-    textAlign:'left',
-    width:'75%',
-    margin:'0 auto 30px'
+  titleServices: {
+    fontSize: "30px",
+    fontWeight: "bolder",
+    textAlign: "left",
+    width: "75%",
+    margin: "0 auto 30px",
   },
-  services:{
-    width:'75%',
-    margin:'0px auto',
-    border:'1px solid red'
-  }
+  services: {
+    width: "75%",
+    margin: "0px auto",
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    "& div": {
+      margin: "10px",
+    },
+  },
+  buttonCancel: {
+    margin: "20px 20px 10px",
+    padding: "8px 15px",
+    fontSize: "15px",
+    fontWeight: "bolder",
+    background: "transparent",
+    border: "1px solid #FF4E4E",
+    borderRadius: "3px",
+    color: "#FF4E4E",
+    transition: ".4s",
+    "&:hover": {
+      cursor: "pointer",
+      background: "#FF4E4E",
+      color: "white",
+    },
+  },
 }));
 
 function EditProfile() {
@@ -159,7 +179,37 @@ function EditProfile() {
       <div className={classes.offerServices}>
         <div className={classes.titleServices}>Servicios</div>
         <div className={classes.services}>
-          <div><Checkbox color="primary" /> Gasfitería</div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+          <div>
+            <Checkbox color="primary" /> Gasfitería
+          </div>
+        </div>
+        <div className={classes.buttonsContent}>
+          <button className={classes.buttonForm}>Guardar Cambios</button>
+          <button className={classes.buttonCancel}>Cancelar</button>
         </div>
       </div>
     </React.Fragment>

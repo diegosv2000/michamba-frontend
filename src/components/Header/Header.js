@@ -41,7 +41,7 @@ const Header = (props) => {
         <img src={logo} alt="logo" />
       </button>
       <nav className={classes.navBar}>{props.show ? <NavButton /> : ""}</nav>
-      <UserNav />
+      {/* <UserNav /> */}
     </header>
   );
 };

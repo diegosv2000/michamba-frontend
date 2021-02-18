@@ -18,7 +18,13 @@ main {
   background: #f8f8f8;
   padding: 40px 0;
 }
-
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+select,button,input{
+  outline: none;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

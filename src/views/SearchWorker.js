@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Footer, Header, Seeker, CardWorker } from "components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 const useStyles = makeStyles(() => ({
   seekerContent: {
@@ -15,6 +15,7 @@ const useStyles = makeStyles(() => ({
 const SearchWorker = () => {
   const show = true;
   const classes = useStyles();
+  let { idservicio } = useParams();
 
   return (
     <React.Fragment>

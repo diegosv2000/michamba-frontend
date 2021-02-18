@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles(() => ({
   seekerContent: {
@@ -9,11 +10,15 @@ const useStyles = makeStyles(() => ({
     flexWrap: "wrap",
     "& select": {
       width: "300px",
-      padding: "2px",
+      padding: "3px",
       border: "1px solid #C5C5C5",
+      background: "white",
       borderRadius: "3px",
       outline: "none",
       fontSize: "15px",
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
   },
   buttonSeeker: {
@@ -36,29 +41,41 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
   const classes = useStyles();
   const history = useHistory();
+  const [services, setServices] = useState([]);
+  let isTrue =useRef(true);
+  useEffect(() => {
+    getWorkers();
+    return () => {
+      isTrue.current=false;
+    }
+  }, [services]);
+
+  const getWorkers = () =>{
+    if(isTrue){
+       axios
+      .get("https://michamba-recursos.herokuapp.com/getserv")
+      .then((res) => {
+        setServices(res.data);
+      });
+    }
+  }
+
+  const searchWorker = (e) => {
+    e.preventDefault();
+    history.push(`/id_servicio=?:${"hola"}`);
+  };
   return (
-    <div className={classes.seekerContent}>
-      <select>
+    <form className={classes.seekerContent}>
+      <select className={classes.select}>
         <option>Selecciona una opción</option>
-        <option>Albañil</option>
-        <option>Carpintero</option>
-        <option>Obrero de C.V.</option>
-        <option>Gasfitero</option>
-        <option>Mucama</option>
-        <option>Personal de Limpieza</option>
-        <option>Cerrajero</option>
-        <option>Pintor</option>
-        <option>Electricista</option>
-        <option>Mecánico</option>
-        <option>Enfermero</option>
+        {services.map((e) => {
+          return <option key={e.nombre}>{e.nombre}</option>;
+        })}
       </select>
-      <button
-        onClick={() => history.push("/SearchWorker/search=gasfitero")}
-        className={classes.buttonSeeker}
-      >
+      <button onClick={searchWorker} className={classes.buttonSeeker}>
         Buscar
       </button>
-    </div>
+    </form>
   );
 };
 

@@ -90,7 +90,7 @@ function SignUp() {
           </div>
           <div className={classes.textForm}>
             <div>¿Ya tienes una cuenta?</div>
-            <button onClick={() => history.push("/SignIn")}>
+            <button onClick={() => history.push("/sign-in")}>
               Inicia Sesión aquí
             </button>
           </div>

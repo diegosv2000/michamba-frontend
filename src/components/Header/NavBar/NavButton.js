@@ -42,13 +42,13 @@ const NavButton = (props) => {
     <React.Fragment>
       <button
         className={classes.signIn}
-        onClick={() => history.push("/SignIn")}
+        onClick={() => history.push("/sign-in")}
       >
         Iniciar sesión
       </button>
       <button
         className={classes.signUp}
-        onClick={() => history.push("/SignUp")}
+        onClick={() => history.push("/sign-up")}
       >
         Registrarse
       </button>

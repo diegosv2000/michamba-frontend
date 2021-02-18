@@ -1,5 +1,13 @@
 import React from "react";
-import { Home, NotFound, SignIn, SignUp, SearchWorker, EditProfile } from "views";
+import {
+  Home,
+  NotFound,
+  SignIn,
+  SignUp,
+  SearchWorker,
+  EditProfile,
+  DataTarget
+} from "views";
 
 const routes = [
   {
@@ -8,24 +16,29 @@ const routes = [
     exact: true,
   },
   {
-    path: "/SignIn",
+    path: "/sign-in",
     component: () => <SignIn />,
     exact: true,
   },
   {
-    path: "/SignUp",
+    path: "/sign-up",
     component: () => <SignUp />,
     exact: true,
   },
   {
-    path: "/SearchWorker/search=gasfitero",
+    path: "/id_servicio=?:idservicio",
     component: () => <SearchWorker />,
     exact: true,
   },
-  
+
   {
-    path: "/Profile",
+    path: "/profile",
     component: () => <EditProfile />,
+    exact: true,
+  },
+  {
+    path: "/credit-card",
+    component: () => <DataTarget />,
     exact: true,
   },
   {

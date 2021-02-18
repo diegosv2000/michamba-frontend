@@ -1,6 +1,7 @@
 import { Checkbox, makeStyles } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { Header, InputForm } from "components";
+import axios from "axios";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -58,8 +59,13 @@ const useStyles = makeStyles(() => ({
       color: "white",
     },
   },
+  buttonForm_1Content: {
+    width: "700px",
+    margin: "10px auto 0",
+    textAlign: "left",
+  },
   buttonForm_1: {
-    margin: "20px auto 10px",
+    margin: "20px 0 40px",
     padding: "10px 15px",
     fontSize: "15px",
     fontWeight: "bolder",
@@ -84,7 +90,7 @@ const useStyles = makeStyles(() => ({
   offerServices: {
     width: "700px",
     boxShadow: "0px 0px 20px 0px rgb(0,0,0,.25)",
-    margin: "20px auto",
+    margin: "20px auto 75px",
     padding: "30px 0",
     borderRadius: "15px",
   },
@@ -99,10 +105,11 @@ const useStyles = makeStyles(() => ({
     width: "75%",
     margin: "0px auto",
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "row",
+    justifyContent: "center",
     flexWrap: "wrap",
     "& div": {
-      margin: "10px",
+      margin: "10px auto 20px",
     },
   },
   buttonCancel: {
@@ -121,10 +128,32 @@ const useStyles = makeStyles(() => ({
       color: "white",
     },
   },
+  genderLabel: {
+    fontWeight: "bolder",
+    width: "30%",
+    borderBottom: "2px solid #719CF0",
+    textAlign: "left",
+  },
+  genderContent: {
+    width: "45%",
+    borderBottom: "2px solid #719CF0",
+    border: "none",
+    borderBottom: "2px solid #719CF0",
+  },
 }));
 
-function EditProfile() {
+const EditProfile = () => {
   const classes = useStyles();
+  const [showServices, setShowServices] = useState(false);
+  const changeVisibility = (e) => {
+    e.preventDefault();
+    setShowServices(!showServices);
+    console.log("Estado: " + showServices);
+  };
+  const [services, setServices] = useState([]);
+  axios.get("https://michamba-recursos.herokuapp.com/getserv").then((res) => {
+    setServices(res.data);
+  });
   return (
     <React.Fragment>
       <Header />
@@ -153,59 +182,53 @@ function EditProfile() {
             <InputForm type="number" label="Mes" />
             <InputForm type="number" label="Año" />
           </section>
-
+          <section>
+            <div className={classes.genderLabel}>Género:</div>
+            <select className={classes.genderContent}>
+              <option>Masculino</option>
+              <option>Femenino</option>
+            </select>
+          </section>
           <section className={classes.inputForm}>
             <select className={classes.identification}>
               <option>Celular</option>
               <option>Teléfono Fijo</option>
             </select>
-            <InputForm type="Numero" label="Numero" />
-            <InputForm type="Codigo Postal" label="Codigo Postal" />
+            <InputForm type="number" label="Numero" />
+            <InputForm type="number" label="Codigo Postal" />
           </section>
 
           <div className={classes.inputForm}>
-            <InputForm type="Distrito" label="Distrito" />
+            <InputForm type="text" label="Distrito" />
           </div>
 
           <div className={classes.inputForm}>
-            <InputForm type="Direccion" label="Direccion" />
+            <InputForm type="text" label="Direccion" />
           </div>
 
           <button className={classes.buttonForm}>Guardar Cambios</button>
         </form>
       </section>
 
-      <button className={classes.buttonForm_1}>Ofrecer Servicios</button>
-      <div className={classes.offerServices}>
+      <div className={classes.buttonForm_1Content}>
+        <button className={classes.buttonForm_1} onClick={changeVisibility}>
+          Ofrecer Servicios
+        </button>
+      </div>
+
+      <div
+        className={classes.offerServices}
+        style={showServices ? { display: "block" } : { display: "none" }}
+      >
         <div className={classes.titleServices}>Servicios</div>
         <div className={classes.services}>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
-          <div>
-            <Checkbox color="primary" /> Gasfitería
-          </div>
+          {services.map((e) => {
+            return (
+              <div key={e.nombre}>
+                <Checkbox color="primary" /> {e.nombre}
+              </div>
+            );
+          })}
         </div>
         <div className={classes.buttonsContent}>
           <button className={classes.buttonForm}>Guardar Cambios</button>
@@ -214,6 +237,6 @@ function EditProfile() {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default EditProfile;

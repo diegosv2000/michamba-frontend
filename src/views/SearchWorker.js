@@ -7,9 +7,9 @@ const useStyles = makeStyles(() => ({
   seekerContent: {
     margin: "30px 0 30px 50px",
   },
-  cardContent:{
-    margin:'40px 50px'
-  }
+  cardContent: {
+    margin: "40px 50px",
+  },
 }));
 
 const SearchWorker = () => {

@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
-import React from "react";
 import { Header, InputForm } from "components";
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "50px 0",
@@ -65,9 +65,45 @@ function SignIn() {
   const classes = useStyles();
   const history = useHistory();
   const show = false;
-  const SignInValue = e =>{
+
+  let qs = require("qs");
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
     e.preventDefault();
-  }
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const SignInValue = (e) => {
+    e.preventDefault();
+    const user = {
+      correo: userData.email,
+      password: userData.password,
+    };
+    console.log("Email: " + user.correo + "\nPass: " + user.password);
+
+    const formData = qs.stringify(user);
+
+    axios
+      .post(`https://michamba-recursos.herokuapp.com/login`, formData)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        if (res.data == "login correcto") {
+          history.push("/");
+        } else {
+          console.log("Usuario duplicado o datos mal ingresados");
+        }
+      })
+      .catch((error) => {
+        console.log("error: " + error);
+      });
+  };
   return (
     <React.Fragment>
       <Header show={show} />
@@ -75,16 +111,30 @@ function SignIn() {
         <form className={classes.form} onSubmit={SignInValue}>
           <h2 className={classes.titleForm}>Iniciar Sesión</h2>
           <div className={classes.inputForm}>
-            <InputForm type="email" label="Email" />
+            <InputForm
+              type="email"
+              label="Email"
+              name="email"
+              onChange={handleChange}
+            />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="password" label="Contraseña" />
+            <InputForm
+              type="password"
+              label="Contraseña"
+              name="password"
+              onChange={handleChange}
+            />
           </div>
           <div className={classes.textForm}>
             <div>¿Aún no tienes una cuenta?</div>
-            <button onClick={() => history.push("/SignUp")}>Registrate aquí</button>
+            <button onClick={() => history.push("/SignUp")}>
+              Registrate aquí
+            </button>
           </div>
-          <button className={classes.buttonForm}>Iniciar Sesión</button>
+          <button className={classes.buttonForm} type="submit">
+            Iniciar Sesión
+          </button>
         </form>
       </section>
     </React.Fragment>

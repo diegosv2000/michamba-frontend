@@ -64,9 +64,9 @@ function SignUp() {
   const classes = useStyles();
   const history = useHistory();
   const show = false;
-  const SignUpValue = e =>{
+  const SignUpValue = (e) => {
     e.preventDefault();
-  }
+  };
   return (
     <React.Fragment>
       <Header show={show} />
@@ -90,7 +90,9 @@ function SignUp() {
           </div>
           <div className={classes.textForm}>
             <div>¿Ya tienes una cuenta?</div>
-            <button onClick={() => history.push("/SignIn")}>Inicia Sesión aquí</button>
+            <button onClick={() => history.push("/SignIn")}>
+              Inicia Sesión aquí
+            </button>
           </div>
           <button className={classes.buttonForm}>Registrarse</button>
         </form>

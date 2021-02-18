@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 import NavButton from "./NavBar/NavButton";
+import UserNav from "./NavBar/UserNav";
 import logo from "images/Logo.png";
 import { useHistory } from "react-router-dom";
 
@@ -40,6 +41,7 @@ const Header = (props) => {
         <img src={logo} alt="logo" />
       </button>
       <nav className={classes.navBar}>{props.show ? <NavButton /> : ""}</nav>
+      <UserNav />
     </header>
   );
 };

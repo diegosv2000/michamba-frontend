@@ -2,15 +2,15 @@ import React from "react";
 import { Card, Container, makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Logo, Male, Female, StarYellow, StarGray } from "images";
+import Cookies from "universal-cookie";
 const useStyles = makeStyles(() => ({
   card: {
     width: "320px",
     height: "200px",
     display: "flex",
     flexDirection: "column",
-    boxShadow:'0px 5px 20px 0px rgb(0,0,0,0.25)',
+    boxShadow: "0px 5px 20px 0px rgb(0,0,0,0.25)",
     borderRadius: "5px",
-
   },
   header: {
     display: "flex",
@@ -63,9 +63,9 @@ const useStyles = makeStyles(() => ({
   stars: {
     display: "flex",
     flexDirection: "row",
-    position:'relative',
-    left:'17px',
-    top:'55px',
+    position: "relative",
+    left: "17px",
+    top: "55px",
     "& img": {
       height: "25px",
     },
@@ -83,23 +83,32 @@ const useStyles = makeStyles(() => ({
       borderBottom: "1px solid #71BBF0",
     },
     "& button": {
-      padding:'7px 12px',
-      margin:'0  0 0 auto',
-      background:'#71BBF0 ',
-      borderRadius:'4px',
-      border:'none',
-      color:'white',
-      fontSize:'16px',
-      fontWeight:'bolder',
+      padding: "7px 12px",
+      margin: "0  0 0 auto",
+      background: "#71BBF0 ",
+      borderRadius: "4px",
+      border: "none",
+      color: "white",
+      fontSize: "16px",
+      fontWeight: "bolder",
 
-      position:'relative',
-      top:'15px',
-      "&:hover":{
-        cursor:'pointer'
-      }
+      position: "relative",
+      top: "15px",
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
   },
 }));
+
+const cookies = new Cookies();
+const verificationSignIn = () => {
+  if (cookies.get("idusuario")) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const CardWorker = (props) => {
   const show = true;
@@ -130,7 +139,15 @@ const CardWorker = (props) => {
         <div className={classes.infoCard}>
           <div>Edad: {props.age}</div>
           <div>Distrito: {props.district}</div>
-          <button onClick={()=>{history.push("/contract-request")}}>Contactar</button>
+          <button
+            onClick={() => {
+              verificationSignIn()
+                ? history.push("/contract-request")
+                : history.push("/sign-in");
+            }}
+          >
+            Contactar
+          </button>
         </div>
       </div>
     </div>

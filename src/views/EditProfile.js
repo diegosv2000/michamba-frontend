@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core";
+import { Checkbox, makeStyles } from "@material-ui/core";
 import React from "react";
 import { Header, InputForm } from "components";
 
@@ -158,7 +158,9 @@ function EditProfile() {
       <button className={classes.buttonForm_1}>Ofrecer Servicios</button>
       <div className={classes.offerServices}>
         <div className={classes.titleServices}>Servicios</div>
-
+        <div className={classes.services}>
+          <div><Checkbox color="primary" /> Gasfitería</div>
+        </div>
       </div>
     </React.Fragment>
   );

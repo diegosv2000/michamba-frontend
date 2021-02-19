@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Header, InputForm } from "components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "20px 0 0",
@@ -104,6 +105,7 @@ function SignUp() {
           history.push("/sign-in");
         } else {
           alert("Revisa bien los datos");
+          swal("Error!", "Ingresa correctamente los datos", "error");
         }
       });
   };

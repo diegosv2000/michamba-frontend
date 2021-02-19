@@ -4,6 +4,7 @@ import { Header, InputForm } from "components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import swal from "sweetalert";
 const useStyles = makeStyles(() => ({
   form: {
     margin: "50px 0",
@@ -96,7 +97,7 @@ const SignIn = () => {
         console.log(res);
         console.log(res.data);
         if (res.data == "login incorrecto") {
-          console.log("Usuario duplicado o datos mal ingresados");
+          swal("Error!", "Usuario duplicado o datos mal ingresados", "error");
         } else {
           cookies.set("idusuario", res.data, { path: "/" });
           history.push("/");

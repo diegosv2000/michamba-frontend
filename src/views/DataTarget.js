@@ -4,6 +4,8 @@ import { Header, InputForm } from "components";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { card } from "images";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -110,12 +112,17 @@ const useStyles = makeStyles(() => ({
 
 function DataTarget() {
   const classes = useStyles();
+  const history = useHistory();
+  const targetData = (e) => {
+    e.preventDefault();
+    swal("Registrado", "Tarjeta registrada", "success");
+  };
   return (
     <React.Fragment>
       <Header show={true} />
 
       <section>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={targetData}>
           <h2 className={classes.titleForm}>Asociar Tarjeta</h2>
           <div className={classes.textForm}>
             <InputForm type="number" label="Ingrese el numero de su tarjeta" />
@@ -144,8 +151,17 @@ function DataTarget() {
           </div>
 
           <div className={classes.buttonTCont}>
-            <button className={classes.buttonCancel}>Cancelar</button>
-            <button className={classes.buttonForm}>Pagar</button>
+            <button
+              className={classes.buttonCancel}
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              Cancelar
+            </button>
+            <button className={classes.buttonForm} onClick={targetData}>
+              Pagar
+            </button>
           </div>
         </form>
       </section>

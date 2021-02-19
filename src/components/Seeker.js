@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
 const useStyles = makeStyles(() => ({
   seekerContent: {
@@ -60,7 +61,7 @@ const Home = () => {
   const searchWorker = (e) => {
     e.preventDefault();
     if (service == "Selecciona una opción" || service == " ") {
-      alert("Ingresa correctamente el servicio :D");
+      swal("Error!", "Ingresa correctamente el servicio!", "error");
     } else {
       history.push(`/services/${service}`);
     }

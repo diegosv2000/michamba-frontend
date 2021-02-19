@@ -2,6 +2,9 @@ import { Checkbox, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { Header, InputForm } from "components";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
+import Cookies from "universal-cookie";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -144,6 +147,7 @@ const useStyles = makeStyles(() => ({
 
 const EditProfile = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [showServices, setShowServices] = useState(false);
   const changeVisibility = (e) => {
     e.preventDefault();
@@ -154,17 +158,22 @@ const EditProfile = () => {
   axios.get("https://michamba-recursos.herokuapp.com/getserv").then((res) => {
     setServices(res.data);
   });
+
+  const editProfiles = (e) => {
+    e.preventDefault();
+    swal("Registrado", "Datos registrados", "success");
+  };
   return (
     <React.Fragment>
       <Header show={true} />
       <section>
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={editProfiles}>
           <h2 className={classes.titleForm}>Datos Personales</h2>
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Nombres" />
+            <InputForm type="text" label="Nombres" name="name" />
           </div>
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Apellidos" />
+            <InputForm type="text" label="Apellidos" name="lname" />
           </div>
 
           <section className={classes.inputForm}>
@@ -174,7 +183,7 @@ const EditProfile = () => {
               <option>Pasaporte</option>
             </select>
 
-            <InputForm type="number" label="Numero" />
+            <InputForm type="number" label="Numero" name="dni" />
           </section>
 
           <section className={classes.inputForm}>
@@ -194,19 +203,21 @@ const EditProfile = () => {
               <option>Celular</option>
               <option>Teléfono Fijo</option>
             </select>
-            <InputForm type="number" label="Numero" />
+            <InputForm type="number" label="Numero" name="cel" />
             <InputForm type="number" label="Codigo Postal" />
           </section>
 
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Distrito" />
+            <InputForm type="text" label="Distrito" name="district" />
           </div>
 
           <div className={classes.inputForm}>
-            <InputForm type="text" label="Direccion" />
+            <InputForm type="text" label="Direccion" name="adress" />
           </div>
 
-          <button className={classes.buttonForm}>Guardar Cambios</button>
+          <button className={classes.buttonForm} type="submit">
+            Guardar Cambios
+          </button>
         </form>
       </section>
 
